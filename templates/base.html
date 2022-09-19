@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<title>{% block title %}{% endblock %} - Mailer</title>
+<link rel="stylesheet" href="{{ url_for('static'), filename='style.css' }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap" rel="stylesheet"> 
+<nav>
+    Mail<b>er</b>
+</nav>
+<section class="content">
+    <div class="top-bar">
+        <form action="get">
+            <input name="search" type="text" placeholder=""Quieres buscar algo? />
+        </form>
+    </div>
+    {% block content %}{% endblock %}
+</section>
