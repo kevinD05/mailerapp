@@ -1,5 +1,20 @@
 {% extends 'base.html' %}
 
+{% block header %}
+<h1>{% block title %}correos enviados{% endblock %}</h1>
+{% endblock %}
 {% block content %}
-chanchito feliz
+<ul>
+    {% for mail in mails %}
+    <li class="mail">
+        <div>
+            <span class="email">{{ mail['email'] }}</span>
+            <span class="subject">{{ mail['subject'] }}</span>
+            <hr>
+            <p class="email-content">{{ mail['content'] }}</span>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+
 {% endblock %}

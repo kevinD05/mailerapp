@@ -18,6 +18,7 @@ def create_app():
     db.init_app(app)
 
     from . import mail
+    
     app.register_blueprint(mail.bp)
 
     return app
