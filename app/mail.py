@@ -17,7 +17,7 @@ def index():
     if search is None:
         c.execute('SELECT * FROM email')
     else:
-        c.execute('SELECT * FROM email where content like %s',('%'+ search +'%',))
+        c.execute('SELECT * FROM email where content like %s',('%'+ search +'%', ))
     mails = c.fetchall()
 
     
@@ -39,7 +39,7 @@ def create():
             errors.append('contenido es obligatorio') 
 
         if len(errors) == 0:
-           # send(email, subject, content)
+            send(email, subject, content)
             db, c = get_db()
             c.execute('INSERT INTO email (email, subject, content) VALUES(%s, %s, %s)', (email, subject, content))
             db.commit()
@@ -47,14 +47,14 @@ def create():
             return redirect(url_for('mail.index'))
         else:
             for error in errors: 
-                flash(errors)
+                flash(error )
     return render_template('mails/create.html')
 
 def send(to, subject, content):
     sg = sendgrid.SendGridAPIClient(api_key=current_app.config['SENDGRID_KEY'])
     from_email = Email(current_app.config['FROM_EMAIL'])
     to_email = To(to)
-    content = content('text/plain', content)
-    mail = Mail(from_email, to_email, content)
-    response =  sg.client.send.post(request_body=mail.get())
+    content = Content('text/plain', content)
+    mail = Mail(from_email, to_email, subject, content)
+    response =  sg.client.mail.send.post(request_body=mail.get())
     print(response)
